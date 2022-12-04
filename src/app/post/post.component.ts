@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss']
 })
-export class PostComponent {
+export class PostComponent implements OnInit {
 
   id: number | undefined;
 
@@ -16,7 +16,7 @@ export class PostComponent {
   ) {
     this.route.params.subscribe(async (params) => {
       this.id = Number(params['id']);
-      await this.ngOnInit()
+      await this.ngOnInit();
     })
   }
 
