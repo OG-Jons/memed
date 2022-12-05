@@ -1,14 +1,24 @@
 // Classes, with one main one that utilizes 75% of the screen on desktop but 100% on mobile
 // Subclass that places divs in grids with 3 wide on desktop and 1 wide on mobile
 
+
+
 .home-memes {
   width: 50%;
   .meme-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 1rem;
-    @media (min-width: 768px) {
-      grid-template-columns: auto;
+    @media (min-width: 600px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+      width: 95vw;
+      margin: 0 auto;
+      @media (min-width: 600px) {
+        width: 35vw;
+      }
     }
   }
 }
