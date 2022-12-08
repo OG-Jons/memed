@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Clipboard } from "@angular/cdk/clipboard";
+import { Post } from "../types/post";
 
 @Component({
   selector: 'app-post-card',
@@ -7,10 +9,19 @@ import { Component, Input } from '@angular/core';
 })
 export class PostCardComponent {
 
-  @Input() post: { title: string } | undefined;
+  constructor(private clipboard: Clipboard) {
+  }
 
-  testSmth() {
-    console.log('Clicked', this.post?.title)
+  @Input() post: Post | undefined;
+
+
+
+  likePost(postID: number | undefined): void {
+    console.log(`Liking post ${postID}`)
+  }
+
+  copyLink(): void {
+    this.clipboard.copy(`${window.location.protocol}${window.location.host}/post/${this.post?.id}`)
   }
 
 }

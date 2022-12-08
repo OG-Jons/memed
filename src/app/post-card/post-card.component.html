@@ -1,13 +1,13 @@
 <!-- Mat card with a header, image and footer to show likes -->
 <div class="post-card">
   <mat-card>
-    <mat-card-header>
-      <mat-card-title (click)="testSmth()">{{ post?.title }}</mat-card-title>
+    <mat-card-header style="margin-bottom: 1em">
+      <mat-card-title class="title" [routerLink]="['/post/'+ post?.id]">{{ post?.title }}</mat-card-title>
     </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <img class="image" mat-card-image [src]="post?.imageURL" [alt]="post?.title" loading="lazy">
     <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
+      <button (click)="likePost(post?.id)" mat-button>{{ post?.loveIts }} LIKES</button>
+      <button (click)="copyLink()" mat-button>SHARE</button>
     </mat-card-actions>
   </mat-card>
 </div>

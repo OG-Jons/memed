@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
+import { Post } from "../types/post";
 
 @Component({
   selector: 'app-post',
@@ -9,6 +10,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class PostComponent implements OnInit {
 
   id: number | undefined;
+
+  post: Post | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,11 +24,17 @@ export class PostComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    if (this.validateId()) {
-      await this.notFound()
+    if (this.validateId() || !this.id) {
+      return await this.notFound()
     }
 
-    // Get post from backend
+    // Get post from backend, but this is not implemented yet, so just fill with random values
+    this.post = {
+      id: this.id,
+      title: 'Cum Sock',
+      imageURL: 'https://wallpaperaccess.com/full/428267.gif',
+      loveIts: 5
+    }
   }
 
 
