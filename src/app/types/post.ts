@@ -3,4 +3,8 @@ export type Post = {
   title: string;
   imageURL: string;
   loveIts: number;
+
+  createdAt: Date;
+
+  userID: number;
 }

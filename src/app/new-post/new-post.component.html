@@ -1,1 +1,24 @@
-<p>new-post works!</p>
+<div class="center-flex">
+  <div *ngIf="files.length === 0" class="file-upload">
+    <h1>Choose images!</h1>
+    <div class="drag-drop-box">
+      <app-file-drop (filesEvent)="loadFiles($event)"></app-file-drop>
+    </div>
+  </div>
+  <div *ngIf="newPosts.length > 0" class="post-info">
+    <h1>Add title </h1>
+    <div style="width: fit-content">
+      <button mat-fab extended (click)="resetImages()" color="primary">
+        <mat-icon>delete</mat-icon>
+        Remove Images
+      </button>
+    </div>
+    <div class="preview" *ngFor="let post of newPosts">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Meme title</mat-label>
+        <input [(ngModel)]="post.title" matInput placeholder="Post title" >
+      </mat-form-field>
+      <img [src]="post.file" [alt]="post.file"/>
+    </div>
+  </div>
+</div>

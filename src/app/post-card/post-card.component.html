@@ -1,13 +1,19 @@
-<!-- Mat card with a header, image and footer to show likes -->
 <div class="post-card">
   <mat-card>
     <mat-card-header style="margin-bottom: 1em">
       <mat-card-title class="title" [routerLink]="['/post/'+ post?.id]">{{ post?.title }}</mat-card-title>
+      <mat-card-subtitle>Created by: {{ post?.userID }} on the {{ post?.createdAt | date: 'medium' }}</mat-card-subtitle>
     </mat-card-header>
     <img class="image" mat-card-image [src]="post?.imageURL" [alt]="post?.title" loading="lazy">
-    <mat-card-actions>
-      <button (click)="likePost(post?.id)" mat-button>{{ post?.loveIts }} LIKES</button>
-      <button (click)="copyLink()" mat-button>SHARE</button>
+    <mat-card-actions align="end">
+<!--      <button (click)="likePost(post?.id)" mat-button>{{ post?.loveIts }} LIKES</button>-->
+      <button (click)="copyLink()" mat-icon-button matTooltip="Copy link to meme" aria-label="Copy link to meme">
+        <mat-icon>share</mat-icon>
+      </button>
+      <button (click)="deletePost(post?.id)" mat-icon-button matTooltip="Delete meme" color="warn" aria-label="Open modal to delete post">
+        <mat-icon>delete</mat-icon>
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>
+

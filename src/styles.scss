@@ -1,10 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .center-flex {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+.error-snackbar {
+  background-color: #b3190e;
+}
+
+snack-bar-container.error-snackbar {
+  background-color: #2ecc71;
+}
+
+.error-snackbar .mat-simple-snackbar {
+  color: #0f4c29;
+}
+
+
+.dropzone {
+  border: 2px dashed #c2185b;
+  border-radius: 15px;
 }

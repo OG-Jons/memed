@@ -33,7 +33,9 @@ export class PostComponent implements OnInit {
       id: this.id,
       title: 'Cum Sock',
       imageURL: 'https://wallpaperaccess.com/full/428267.gif',
-      loveIts: 5
+      loveIts: 5,
+      createdAt: new Date(),
+      userID: 1
     }
   }
 

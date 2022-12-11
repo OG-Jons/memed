@@ -1,0 +1,8 @@
+<div class="center">
+  <ngx-file-drop accept='image/*' [multiple]="true" dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+                 dropZoneClassName="dropzone">
+    <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector" class="dropzone">
+      Upload files here or <button mat-button type="button" (click)="openFileSelector()">Browse Files</button> to upload.
+    </ng-template>
+  </ngx-file-drop>
+</div>
