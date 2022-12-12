@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { UserService } from "../services/user.service";
+import { AuthService } from "../services/auth.service";
 
 @Component({
   selector: 'app-title',
@@ -16,6 +18,11 @@ export class TitleComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, public userService: UserService) {
+  }
+
+  logoutUser() {
+    this.authService.logout()
+  }
 
 }

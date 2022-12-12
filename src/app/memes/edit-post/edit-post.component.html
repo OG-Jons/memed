@@ -1,0 +1,11 @@
+<div class="center-flex">
+  <mat-form-field class="edit-post-input">
+    <mat-label>Meme Title</mat-label>
+    <input matInput placeholder="Meme title" [(ngModel)]="newTitle">
+  </mat-form-field>
+<!--  2 buttons, one to go back to post and one to submit the new title -->
+  <div>
+<button mat-raised-button (click)="goBack()">Back</button>
+    <button mat-raised-button color="primary" (click)="updatePost()">Submit</button>
+  </div>
+</div>

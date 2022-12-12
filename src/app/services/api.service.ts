@@ -12,7 +12,7 @@ export class ApiService {
   }
 
   getHealth(): Observable<any> {
-    return this.http.get(`${this.url}/health`, { observe: 'response' });
+    return this.http.get(`${this.url}/user/health`, { observe: 'response' });
   }
 
   post(path: string, body: any): Observable<any> {
@@ -22,4 +22,13 @@ export class ApiService {
   get(path: string): Observable<any> {
     return this.http.get(`${this.url}${path}`, { observe: 'response' });
   }
+
+  put(path: string, body: any): Observable<any> {
+    return this.http.put(`${this.url}${path}`, body, { observe: 'response' })
+  }
+
+  delete(path: string): Observable<any> {
+    return this.http.delete(`${this.url}${path}`, { observe: 'response' })
+  }
+
 }

@@ -14,11 +14,10 @@ export class LoginComponent implements OnInit {
   fieldRequired = "This field is required"
 
   constructor(private auth: AuthService) {
-    const emailregex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     this.registerForm = new FormGroup(
       {
         'username': new FormControl(null, [Validators.required]),
-        'email': new FormControl(null, [Validators.required, Validators.pattern(emailregex)]),
+        'displayname': new FormControl('display name', [Validators.required]),
         'password': new FormControl(null, [Validators.required, this.checkPassword]),
       }
     )
@@ -29,19 +28,13 @@ export class LoginComponent implements OnInit {
   }
 
   createForm() {
-    const emailregex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     this.registerForm = new FormGroup(
       {
         'username': new FormControl(null, [Validators.required]),
-        'email': new FormControl(null, [Validators.required, Validators.pattern(emailregex)]),
+        'displayname': new FormControl('display name', [Validators.required]),
         'password': new FormControl(null, [Validators.required, this.checkPassword]),
       }
     )
-  }
-
-  emaiErrors() {
-    return this.registerForm?.get('email')?.hasError('required') ? 'This field is required' :
-      this.registerForm?.get('email')?.hasError('pattern') ? 'Not a valid emailaddress' : ''
   }
 
   checkPassword(control: any) {
@@ -56,18 +49,25 @@ export class LoginComponent implements OnInit {
   }
 
   checkValidation(input: string) {
-    const validation = this.registerForm?.get(input)?.invalid && (this.registerForm.get(input)?.dirty || this.registerForm.get(input)?.touched)
-    return validation;
+    return this.registerForm?.get(input)?.invalid && (this.registerForm.get(input)?.dirty || this.registerForm.get(input)?.touched);
   }
 
-  onSubmit(formData: FormGroup, formDirective: FormGroupDirective): void {
-    const email = formData.value.email;
-    const password = formData.value.password;
-    const username = formData.value.username;
-    console.log({ email, password, username });
-    this.auth.register(email, password, username);
-    formDirective.resetForm();
-    this.registerForm?.reset();
+  onSubmit(formData: FormGroup, formDirective: FormGroupDirective, type: 'register' | 'login'): void {
+    if (type === 'register') {
+      const displayname = formData.value.displayname;
+      const password = formData.value.password;
+      const username = formData.value.username;
+      this.auth.register(username, displayname, password);
+      formDirective.resetForm();
+      this.registerForm?.reset();
+      return;
+    } else if (type === 'login') {
+      const password = formData.value.password;
+      const username = formData.value.username;
+      this.auth.login(username, password);
+      formDirective.resetForm();
+      this.registerForm?.reset();
+    }
   }
 
 }

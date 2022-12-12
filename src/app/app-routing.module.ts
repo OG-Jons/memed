@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from "./home/home.component";
-import { NewPostComponent } from "./new-post/new-post.component";
+import { NewPostComponent } from "./memes/new-post/new-post.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
-import { PostComponent } from "./post/post.component";
+import { PostComponent } from "./memes/post/post.component";
 import { LoginComponent } from "./login/login.component";
+import { AuthGuard } from "./guards/auth.guard";
+import {EditPostComponent} from "./memes/edit-post/edit-post.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'auth',
@@ -17,11 +20,18 @@ const routes: Routes = [
   },
   {
     path: 'new',
-    component: NewPostComponent
+    component: NewPostComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'post/edit/:id',
+    component: EditPostComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'post/:id',
-    component: PostComponent
+    component: PostComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'not-found',

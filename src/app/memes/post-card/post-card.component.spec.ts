@@ -39,7 +39,9 @@ describe('PostCardComponent', () => {
       id: 1,
       title: 'Sample Post',
       imageURL: 'https://via.placeholder.com/300',
-      loveIts: 0
+      loveIts: 0,
+      createdAt: new Date(),
+      userID: 1
     };
     fixture.detectChanges();
   });
@@ -47,39 +49,6 @@ describe('PostCardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should call the likePost function when the like button is clicked', () => {
-    // spy on the likePost function
-    spyOn(component, 'likePost');
-
-    // trigger a click event on the like button
-    const likeButton = fixture.debugElement.query(By.css('button:nth-of-type(1)')).nativeElement;
-    likeButton.click();
-
-    // assert that the likePost function was called with the post ID
-    expect(component.likePost).toHaveBeenCalledWith(1);
-  });
-
-  it('should not log anything when the id is undefined', () => {
-    // stub the post data
-    component.post = {
-      id: undefined,
-      title: 'Sample Post',
-      imageURL: 'https://via.placeholder.com/300',
-      loveIts: 0
-    };
-    fixture.detectChanges();
-
-    // spy on the likePost function
-    spyOn(component, 'likePost');
-
-    // trigger a click event on the like button
-    const likeButton = fixture.debugElement.query(By.css('button:nth-of-type(1)')).nativeElement;
-    likeButton.click();
-
-    // assert that the likePost function was called with the post ID
-    expect(component.likePost).toHaveBeenCalledWith(undefined);
-  })
 
   it('should call the copyLink function when the share button is clicked', () => {
     // spy on the copyLink function

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { Post } from "../types/post";
+import { Post } from "../../types/post";
+import { ApiService } from "../../services/api.service";
 
 @Component({
   selector: 'app-post',
@@ -9,41 +10,36 @@ import { Post } from "../types/post";
 })
 export class PostComponent implements OnInit {
 
-  id: number | undefined;
+  id: string | undefined;
 
   post: Post | undefined;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private apiService: ApiService
   ) {
     this.route.params.subscribe(async (params) => {
-      this.id = Number(params['id']);
+      this.id = params['id'];
       await this.ngOnInit();
     })
   }
 
   async ngOnInit(): Promise<void> {
-    if (this.validateId() || !this.id) {
+    if (!this.id) {
       return await this.notFound()
     }
 
     // Get post from backend, but this is not implemented yet, so just fill with random values
-    this.post = {
-      id: this.id,
-      title: 'Cum Sock',
-      imageURL: 'https://wallpaperaccess.com/full/428267.gif',
-      loveIts: 5,
-      createdAt: new Date(),
-      userID: 1
-    }
+    this.apiService.get(`/meme/${this.id}/`).subscribe((data) => {
+      this.post = {
+        ...data.body,
+        createdAtDate: new Date(data.body.createdAt * 1000)
+      };
+    }, () => {
+      this.notFound();
+    })
   }
-
-
-  validateId(): boolean {
-    return !this.id || isNaN(this.id)
-  }
-
 
   async notFound(): Promise<void> {
     await this.router.navigate(['/not-found']);

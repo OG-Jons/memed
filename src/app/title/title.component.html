@@ -25,6 +25,8 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>MEMED</span>
+      <span class="example-spacer"></span>
+      <button *ngIf="userService.isLoggedIn()" mat-button (click)="logoutUser()">Logout</button>
     </mat-toolbar>
     <router-outlet style="padding: 5px"></router-outlet>
   </mat-sidenav-content>

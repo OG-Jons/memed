@@ -16,7 +16,6 @@ export class FileDropComponent {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-
           // Here you can access the real file
           console.log(droppedFile.relativePath, file);
 

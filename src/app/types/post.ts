@@ -1,10 +1,14 @@
 export type Post = {
-  id?: number;
+  id?: string;
   title: string;
-  imageURL: string;
-  loveIts: number;
+  image: string;
 
-  createdAt: Date;
+  createdAt: number;
+  createdAtDate: Date;
 
-  userID: number;
+  creator?: {
+    id: string;
+    username: string;
+    name: string;
+  };
 }

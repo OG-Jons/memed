@@ -1,0 +1,22 @@
+<div class="post-card">
+  <mat-card>
+    <mat-card-header style="margin-bottom: 1em">
+      <mat-card-title class="title" [routerLink]="['/post/', post?.id]">{{ post?.title }}</mat-card-title>
+      <mat-card-subtitle>Created by: {{ post?.creator?.name }} on the {{ post?.createdAtDate | date: 'medium' }}</mat-card-subtitle>
+    </mat-card-header>
+    <img class="image" (click)="shrunk = !shrunk" mat-card-image [src]="imageURL()" [class.shrinkImage]="shrunk" [alt]="post?.title" loading="lazy">
+    <mat-card-actions align="end">
+<!--      <button (click)="likePost(post?.id)" mat-button>{{ post?.loveIts }} LIKES</button>-->
+      <button (click)="copyLink()" mat-icon-button matTooltip="Copy link to meme" aria-label="Copy link to meme">
+        <mat-icon>share</mat-icon>
+      </button>
+      <button [routerLink]="['/post/edit/', post?.id]" *ngIf="userPost()" mat-icon-button matTooltip="Edit your meme">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *ngIf="userService.isAdmin()" (click)="deletePost(post?.id)" mat-icon-button matTooltip="Delete meme" color="warn" aria-label="Open modal to delete post">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

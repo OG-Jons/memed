@@ -18,7 +18,11 @@
         <mat-label>Meme title</mat-label>
         <input [(ngModel)]="post.title" matInput placeholder="Post title" >
       </mat-form-field>
-      <img [src]="post.file" [alt]="post.file"/>
+      <img [src]="post.dataURL" [alt]="post.file.name"/>
+      <hr *ngIf="newPosts.length > 1" style="width: 80%" />
     </div>
+    <button mat-raised-button color="primary" (click)="uploadImages()">
+      Create Memes
+    </button>
   </div>
 </div>
