@@ -1,0 +1,8 @@
+node_modules
+.angular
+.idea
+.vscode
+coverage
+.gitignore
+README.md
+user-endpoints.md
